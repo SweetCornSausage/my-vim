@@ -1,0 +1,281 @@
+# 旧了
+
+"----------------------------------------------------------------------
+" CTRL系:
+"----------------------------------------------------------------------
+
+" h j k l : 光标移动
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
+cnoremap <c-h> <left>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+cnoremap <c-l> <right>
+
+" n : 开关文件树
+nnoremap <C-n> :NERDTreeToggle<cr>
+
+" t x v : fzf
+CTRL-T      open in a new tab
+CTRL-X      a new split 
+CTRL-V      a new vertical split
+
+
+"----------------------------------------------------------------------
+" ALT系:
+"----------------------------------------------------------------------
+
+" h j k l : 快速移动
+nnoremap <m-h> b
+nnoremap <m-l> w
+inoremap <m-h> <c-left>
+inoremap <m-l> <c-right>
+nnoremap <m-j> gj
+nnoremap <m-k> gk
+inoremap <m-j> <c-\><c-o>gj
+inoremap <m-k> <c-\><c-o>gk
+cnoremap <m-h> <c-left>
+cnoremap <m-l> <c-right>
+
+" 1 2 9 0 : (删除)到行首/尾
+nnoremap <m-9> d$
+inoremap <m-9> <c-\><c-o>d$
+nnoremap <m-2> d^
+inoremap <m-2> <c-\><c-o>d^
+nnoremap <m-0> $
+inoremap <m-0> <c-\><c-o>$
+nnoremap <m-1> ^
+inoremap <m-1> <c-\><c-o>^
+
+" 3 4 5 6 7 : 编译运行
+noremap <silent><m-3> :AsyncTaskEdit<cr>
+noremap <silent><m-5> :AsyncTask file-run<cr>
+noremap <silent><m-4> :AsyncTask file-build<cr>
+noremap <silent><m-6> :AsyncTask project-run<cr>
+noremap <silent><m-7> :AsyncTask project-build<cr>
+
+" H J K L : 窗口移动 <c-w>
+nnoremap <m-H> <c-w>h
+nnoremap <m-L> <c-w>l
+nnoremap <m-J> <c-w>j
+nnoremap <m-K> <c-w>k
+inoremap <m-H> <esc><c-w>h
+inoremap <m-L> <esc><c-w>l
+inoremap <m-J> <esc><c-w>j
+inoremap <m-K> <esc><c-w>k
+
+" z Z v 撤销 剪切板
+nnoremap <m-z> u
+nnoremap <m-Z> <c-r>
+nnoremap <m-v> :reg<cr>
+inoremap <m-z> <c-o>u
+inoremap <m-Z> <c-o><c-r>
+nnoremap <m-v> <c-o>:reg<cr>
+
+" S : 彩色单词
+nnoremap <m-S> :SemanticHighlightToggle<cr>
+inoremap <m-S> <c-o>:SemanticHighlightToggle<cr>
+
+" F : 格式化
+nnoremap <m-F> :Autoformat<cr>
+inoremap <m-F> <c-o>:Autoformat<cr>
+
+
+"----------------------------------------------------------------------
+" <leader>系:
+"----------------------------------------------------------------------
+
+" t (t c p n h l) : tab操作
+nnoremap <silent> <leader>tt :tabnew<cr>
+nnoremap <silent> <leader>tc :tabclose<cr>
+nnoremap <silent> <leader>tp :tabp<cr>
+nnoremap <silent> <leader>tn :tabn<cr>
+nnoremap <silent> <leader>th :call Tab_MoveLeft()<cr>
+nnoremap <silent> <leader>tl :call Tab_MoveRight()<cr>
+
+" a (a s l / .) : easymotion
+noremap <leader>as <Plug>(easymotion-s) " search 
+noremap <Leader>aa <Plug>(easymotion-overwin-w) " 顺手,所有单词
+noremap <Leader>a. <Plug>(easymotion-repeat)
+noremap <Leader>al <Plug>(easymotion-bd-w) " line
+noremap <leader>a/ <Plug>(easymotion-sn) 
+
+" w : vim-win
+<leader>w :Win<cr>
+let g:win_ext_command_map = {
+	\   'c': 'wincmd c',
+	\   'C': 'close!',
+	\   'q': 'quit',
+	\   'Q': 'quit!',
+	\   '!': 'qall!',
+	\   'v': 'wincmd v',
+	\   's': 'wincmd s',
+	\   'n': 'bnext',
+	\   'N': 'bnext!',
+	\   'p': 'bprevious',
+	\   'P': 'bprevious!',
+	\   "\<c-n>": 'tabnext',
+	\   "\<c-p>": 'tabprevious',
+	\   '=': 'wincmd =',
+	\   't': 'tabnew',
+	\   'x': 'Win#exit'
+	\ }
+
+" g (s g d c t e f i a z) : tags跳转
+<leader>gs 	Find symbol (reference) under cursor
+<leader>gg 	Find symbol definition under cursor
+<leader>gd 	Functions called by this function
+<leader>gc 	Functions calling this function
+<leader>gt 	Find text string under cursor
+<leader>ge 	Find egrep pattern under cursor
+<leader>gf 	Find file name under cursor
+<leader>gi 	Find files #including the file name under cursor
+<leader>ga 	Find places where current symbol is assigned
+<leader>gz 	Find current word in ctags database
+
+" f (h s t b z) : leaderF_
+" h 打开最近使用的文件 MRU，进行模糊匹配
+noremap <leader>fh :LeaderfMru<cr>
+" s 打开函数列表，按 i 进入模糊匹配，ESC 退出
+noremap <leader>fh :LeaderfFunction!<cr>
+" t 打开 tag 列表，i 进入模糊匹配，ESC退出
+noremap <leader>ft :LeaderfBufTag!<cr>
+" b 打开 buffer 列表进行模糊匹配
+noremap <leader>fb :LeaderfBuffer<cr>
+" z 全局 tags 模糊匹配
+noremap <leader>fz :LeaderfTag<cr>
+
+
+"----------------------------------------------------------------------
+" unimpaired 不全
+"----------------------------------------------------------------------
+
+" NEXT AND PREVIOUS
+[a     		previous
+]a     		next
+[A     		first
+]A     		last
+[b     		bprevious
+]b     		bnext
+[B     		bfirst
+]B     		blast
+[l     		lprevious
+]l     		lnext
+[L     		lfirst
+]L     		llast
+[<C-L> 		lpfile
+]<C-L> 		lnfile
+[q     		cprevious
+]q     		cnext
+[Q     		cfirst
+]Q     		clast
+[<C-Q> 		cpfile (Note that <C-Q> only works in a terminal if you disable
+]<C-Q> 		cnfile flow control: stty -ixon)
+[t     		tprevious
+]t     		tnext
+[T     		tfirst
+]T     		tlast
+[<C-T> 		ptprevious
+]<C-T> 		ptnext
+[f          Go to the file preceding the current one alphabetically in the current file's directory.
+]f          Go to the file succeeding the current one alphabetically in the current file's directory.
+[n          Go to the previous SCM conflict marker or diff/patch hunk.  Try d[n inside a conflict.
+]n           Go to the next SCM conflict marker or diff/patch hunk.Try d]n inside a conflict.
+
+" LINE OPERATIONS
+[<Space>    Add [count] blank lines above the cursor.
+]<Space>    Add [count] blank lines below the cursor.
+[e          Exchange the current line with [count] lines above it.
+]e          Exchange the current line with [count] lines below it.
+
+
+"----------------------------------------------------------------------
+" commentary 注释
+"----------------------------------------------------------------------
+
+gcc         注释当前行（普通模式）
+gc          可视模式下，注释当前选中的部分
+gcu         撤销上一次注释的部分，可以是一行也可以是多行
+" 为python和shell等添加注释
+	autocmd FileType python,shell,coffee set commentstring=#\ %s
+" 修改注释风格
+	autocmd FileType java,c,cpp set commentstring=//\ %s
+
+
+"----------------------------------------------------------------------
+" signature 书签
+"----------------------------------------------------------------------
+
+a-zA-Z: 不可重复
+[d]mx               上[删]标记x
+m ,/./-/<space>/\/  (字母顺序)加/加减/删行/全删/列表
+(`|')\[\](`|')        (字母顺序)前后跳转(位置顺序)
+
+0-9: 可重复
+m([s-]1)            上[删]标记!
+\[\](-|=)             (同类)前后跳转(任意)
+m<bs>/？            全删/列表
+
+
+"----------------------------------------------------------------------
+" surround 不全
+"----------------------------------------------------------------------
+
+类似于文本对象使用中a/i的作用的s
+v模式 S/gS
+
+
+"----------------------------------------------------------------------
+" 文本对象
+"----------------------------------------------------------------------
+l   一行
+a   函数参数
+i   同缩进
+y   语法文本对象
+f   函数
+c   类
+,   列表元素
+u   uri/url
+r   块
+
+
+"----------------------------------------------------------------------
+" leaderF
+"----------------------------------------------------------------------
+
+<C-C>
+<ESC> 		quit from LeaderF
+<C-R> 		switch between fuzzy search mode and regex mode
+<C-F> 		switch between full path search mode and name only search mode
+<Tab> 		switch to normal mode
+<C-V>
+<S-Insert> 	paste from clipboard
+<C-U> 		clear the prompt
+<C-W> 		delete the word before the cursor in the prompt
+<C-J> 		move the cursor downward in the result window
+<C-K> 		move the cursor upward in the result window
+<Up>
+<Down> 		recall last/next input pattern from history
+<2-LeftMouse>
+<CR> 		open the file under cursor or selected(when multiple files are selected)
+<C-X> 		open in horizontal split window
+<C-]> 		open in vertical split window
+<C-T> 		open in new tabpage
+<F5> 		refresh the cache
+<C-LeftMouse>
+<C-S> 		select multiple files
+<S-LeftMouse> 	select consecutive multiple files
+<C-A> 		select all files
+<C-L> 		clear all selections
+<BS> 		delete the preceding character in the prompt
+<Del> 		delete the current character in the prompt
+<Home> 		move the cursor to the begin of the prompt
+<End> 		move the cursor to the end of the prompt
+<Left> 		move the cursor one character to the left in the prompt
+<Right> 	move the cursor one character to the right in the prompt
+<C-P> 		preview the result
+<C-Up> 		scroll up in the popup preview window
+<C-Down> 	scroll down in the popup preview window
+
